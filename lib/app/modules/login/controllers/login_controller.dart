@@ -1,7 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../data/constant/endpoint.dart';
+import '../../../data/provider/api_provider.dart';
+
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   final count = 0.obs;
   @override
@@ -19,5 +25,37 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  login() async {
+    try {
+      FocusScope.of(Get.context!).unfocus();
+      formKey.currentState?.save();
+      if (formKey.currentState!.validate()) {
+        final response = await ApiProvider.instance().post(Endpoint.login,data: dio.FormData.fromMap({
+          "email": emailController.text.toString(),
+          "password": passwordController.text.toString()}));
+        if (response.statusCode == 200) {
+          ResponseLoginPost responseLogin = ResponseLoginPost.fromJson(response.data);
+          await StorageProvider.write(StorageKey.idUser, responseLogin.data!.id.toString());
+          await StorageProvider.write(StorageKey.name, responseLogin.data!.name.toString());
+          await StorageProvider.write(StorageKey.status, "logged");
+          Get.snackbar("Success", "Login Success!", backgroundColor: Colors.green);
+          log("Name : ${StorageProvider.read(StorageKey.name)}");
+          Get.offAllNamed(Routes.DASHBOARD);
+        } else {
+          Get.snackbar("Sorry", "Login Failed!", backgroundColor: Colors.orange);
+        }
+      }
+    }on dio.DioException catch(e) {
+      if (e.response != null){
+        if (e.response?.data != null){
+          Get.snackbar("Sorry", "${e.response?.data['message']}", backgroundColor: Colors.orange);
+        }
+      } else {
+        Get.snackbar("Sorry", e.message ?? "", backgroundColor: Colors.red);
+      }
+    }
+    catch (e) {
+      Get.snackbar("Error", e.toString(), backgroundColor: Colors.red);
+    }
+  }
 }
