@@ -1,4 +1,10 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:geeks_foradmin/app/modules/book/views/book_view.dart';
+import 'package:geeks_foradmin/app/modules/genre/views/genre_view.dart';
+import 'package:geeks_foradmin/app/modules/home/views/home_view.dart';
+import 'package:geeks_foradmin/app/modules/rent/views/rent_view.dart';
+import 'package:geeks_foradmin/app/modules/user/views/user_view.dart';
 
 import 'package:get/get.dart';
 
@@ -8,17 +14,64 @@ class DashboardView extends GetView<DashboardController> {
   const DashboardView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('DashboardView'),
-        centerTitle: true,
+    return GetBuilder<DashboardController>(
+        builder: (controller){
+          return Scaffold(
+            body: _buildBody(),
+            bottomNavigationBar: Obx(()=>_buildNavigationBar()),
+          );
+        }
+    );
+  }
+
+  Widget _buildBody() {
+    return SafeArea(
+        child: Obx(()=>PageView(
+          controller: controller.pageController.value,
+          children: const [
+            HomeView(),
+            BookView(),
+            GenreView(),
+            RentView(),
+            UserView(),
+          ],
+          onPageChanged: (value){
+            controller.tabIndex.value = value;
+          },
+        )
+        ));
+  }
+
+  Widget _buildNavigationBar() {
+    return Container(
+      decoration: const BoxDecoration(
+
       ),
-      body: const Center(
-        child: Text(
-          'DashboardView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      child: CurvedNavigationBar(
+        backgroundColor: const Color(0xfff3f3f3),
+        color: const Color(0xff5947ff),
+        onTap: (index)=>controller.changeTabIndex(index),
+        index: controller.tabIndex.value,
+        animationDuration: const Duration(milliseconds: 200),
+        buttonBackgroundColor: const Color(0xff6f1bff),
+        items: [
+          _buildNavBarItem(Icons.home),
+          _buildNavBarItem(Icons.book),
+          _buildNavBarItem(Icons.list),
+          _buildNavBarItem(Icons.shopping_cart),
+          _buildNavBarItem(Icons.person),
+        ],
       ),
+    );
+  }
+  Widget _buildNavBarItem(IconData icon){
+    return Padding(
+        padding: const EdgeInsets.all(5),
+        child: Icon(
+          icon,
+          color: Colors.white,
+          size: 30,
+        )
     );
   }
 }

@@ -8,6 +8,12 @@ abstract class Routes {
   static const DASHBOARD = _Paths.DASHBOARD;
   static const BOOK = _Paths.BOOK;
   static const GENRE = _Paths.GENRE;
+  static const RENT = _Paths.RENT;
+  static const USER = _Paths.USER;
+  static const ADD_BOOK = _Paths.ADD_BOOK;
+  static const ADD_GENRE = _Paths.ADD_GENRE;
+  static const EDIT_BOOK = _Paths.EDIT_BOOK;
+  static const RENT_DETAIL = _Paths.RENT_DETAIL;
 }
 
 abstract class _Paths {
@@ -17,4 +23,10 @@ abstract class _Paths {
   static const DASHBOARD = '/dashboard';
   static const BOOK = '/book';
   static const GENRE = '/genre';
+  static const RENT = '/rent';
+  static const USER = '/user';
+  static const ADD_BOOK = '/add-book';
+  static const ADD_GENRE = '/add-genre';
+  static const EDIT_BOOK = '/edit-book';
+  static const RENT_DETAIL = '/rent-detail';
 }

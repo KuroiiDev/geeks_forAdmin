@@ -1,13 +1,21 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constant/endpoint.dart';
+import '../../../data/model/response_login_post.dart';
 import '../../../data/provider/api_provider.dart';
+import '../../../data/provider/storage_provider.dart';
+import '../../../routes/app_pages.dart';
 
 class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  var isObs = true.obs;
 
   final count = 0.obs;
   @override
@@ -23,6 +31,12 @@ class LoginController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  void obscurePass(){
+    isObs.value = !isObs.value;
+    update();
+    print(isObs.value);
   }
 
   login() async {
