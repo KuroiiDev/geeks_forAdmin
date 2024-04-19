@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geeks_foradmin/app/widgets/base_64_converter.dart';
 
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import '../../../data/constant/global_color.dart';
 import '../../../routes/app_pages.dart';
-import '../../../widgets/base_64.dart';
 import '../controllers/book_controller.dart';
 
 class BookView extends GetView<BookController> {
@@ -61,7 +61,7 @@ class BookView extends GetView<BookController> {
                                           borderRadius:
                                           BorderRadius.circular(20),
                                           child: Image(
-                                            image: base64widget(
+                                            image: ImageConverter.base64ToImage(
                                                 state[index].cover ?? '-'),
                                             fit: BoxFit.cover,
                                             alignment: Alignment.center,

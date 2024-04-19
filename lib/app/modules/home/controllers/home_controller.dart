@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:geeks_foradmin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  final TextEditingController idController = TextEditingController();
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +21,13 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  search() {
+    if (idController.text.isNotEmpty) {
+      var id = idController.text;
+      idController.value = const TextEditingValue(text: '');
+      Get.toNamed(Routes.RENT_DETAIL, parameters: {'id' : id});
+    } else {
+      Get.snackbar('Error', 'Insert Rent Code!', backgroundColor: Colors.red);
+    }
+  }
 }
