@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import '../../../data/constant/global_color.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/rent_controller.dart';
 
 class RentView extends GetView<RentController> {
@@ -42,7 +43,7 @@ class RentView extends GetView<RentController> {
                     return ListView.builder(
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () {},
+                            onTap: () {Get.toNamed(Routes.RENT_DETAIL, parameters: {'id' : state[index].id.toString()});},
                             child: Card(
                               elevation: 5.0,
                               child: Container(

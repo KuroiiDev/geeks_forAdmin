@@ -19,7 +19,7 @@ class UserView extends GetView<UserController> {
         centerTitle: true,
       ),
         floatingActionButton: FloatingActionButton(
-          onPressed: ()=>Get.toNamed(Routes.STAFF),
+          onPressed: ()=>controller.routing(),
           backgroundColor: Colors.deepPurpleAccent,
           child: Icon(Icons.admin_panel_settings_outlined),
         ),

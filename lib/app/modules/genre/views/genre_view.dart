@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../data/constant/global_color.dart';
 import '../../../routes/app_pages.dart';
@@ -19,7 +20,7 @@ class GenreView extends GetView<GenreController> {
           centerTitle: true,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => Get.toNamed(Routes.ADD_GENRE),
+          onPressed: ()=>controller.routing(),
           backgroundColor: Colors.deepPurpleAccent,
           child: Icon(Icons.add),
         ),
@@ -48,7 +49,22 @@ class GenreView extends GetView<GenreController> {
                       return ListView.builder(
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {},
+                              onTap: (){
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.error,
+                                  showCancelBtn: true,
+                                  showConfirmBtn: true,
+                                  onConfirmBtnTap: () => controller.deleteGenre(state[index].id),
+                                  text:
+                                  'Are you sure you want to delete this genre?',
+                                  confirmBtnText: 'Delete',
+                                  title: 'Confirmation',
+                                  cancelBtnText: 'keep',
+                                  confirmBtnColor: Colors.red,
+                                  animType: QuickAlertAnimType.scale,
+                                );
+                              },
                               child: Card(
                                   elevation: 5.0,
                                   child: Container(

@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:geeks_foradmin/app/data/provider/storage_provider.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constant/endpoint.dart';
 import '../../../data/model/response_book_get.dart';
 import '../../../data/provider/api_provider.dart';
+import '../../../routes/app_pages.dart';
 
 class BookController extends GetxController with StateMixin {
   var bookData = Rxn<List<DataBook>>();
@@ -20,6 +23,7 @@ class BookController extends GetxController with StateMixin {
   @override
   void onReady() {
     super.onReady();
+    refresh();
   }
 
   @override
@@ -27,7 +31,16 @@ class BookController extends GetxController with StateMixin {
     super.onClose();
   }
 
+  routing() {
+    if (StorageProvider.read(StorageKey.role) == 'ADMIN') {
+      Get.toNamed(Routes.ADD_BOOK);
+    } else {
+      Get.snackbar("Sorry", "Only For Admin!", backgroundColor: Colors.orange);
+    }
+  }
+
   Future<void> getData() async{
+
     bookData.value = null;
     try {
       final response = await ApiProvider.instance().get(Endpoint.book);

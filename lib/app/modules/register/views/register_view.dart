@@ -10,6 +10,9 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+        ),
         body: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.sizeOf(context).height,
@@ -54,6 +57,28 @@ class RegisterView extends GetView<RegisterController> {
                     Obx(() =>
                         _buildPasswordField()
                     ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Obx(()=>
+                          Checkbox(
+                              value: controller.isAdmin.value,
+                              shape: const CircleBorder(),
+                              onChanged: (value){
+                                if (value == true){
+                                  controller.isAdmin.value = true;
+                                }else {
+                                  controller.isAdmin.value = false;
+                                }
+                              }
+                          ),
+                        ),
+                        const Text('Register As Admin')
+                      ],
+                    ),
                     const SizedBox(height: 30),
                     _buildButtonLogin(),
                   ],
@@ -95,7 +120,7 @@ class RegisterView extends GetView<RegisterController> {
 
   Widget _buildNameField(){
     return TextFormField(
-      controller: controller.emailController,
+      controller: controller.nameController,
       style: const TextStyle(color: Colors.white, fontSize: 20),
       decoration: InputDecoration(
         hintText: "Name",
@@ -151,7 +176,7 @@ class RegisterView extends GetView<RegisterController> {
   Widget _buildButtonLogin(){
     return ElevatedButton.icon(
       onPressed: ()=>controller.register(),
-      label: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 25)),
+      label: const Text("Register", style: TextStyle(color: Colors.white, fontSize: 25)),
       icon: const Icon(Icons.login, color: Colors.white),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(20.0),

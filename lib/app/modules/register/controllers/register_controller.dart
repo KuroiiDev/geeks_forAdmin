@@ -12,6 +12,7 @@ class RegisterController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   var isObs = true.obs;
+  var isAdmin = false.obs;
 
   @override
   void onInit() {
@@ -39,6 +40,9 @@ class RegisterController extends GetxController {
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
       var link = Endpoint.registerStaff;
+      if (isAdmin.value){
+        link = Endpoint.registerAdmin;
+      }
       if (formKey.currentState!.validate()) {
         final response = await ApiProvider.instance().post(link,data:
         {

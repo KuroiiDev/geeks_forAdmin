@@ -6,6 +6,8 @@ import '../modules/add_genre/bindings/add_genre_binding.dart';
 import '../modules/add_genre/views/add_genre_view.dart';
 import '../modules/book/bindings/book_binding.dart';
 import '../modules/book/views/book_view.dart';
+import '../modules/book_detail/bindings/book_detail_binding.dart';
+import '../modules/book_detail/views/book_detail_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/edit_book/bindings/edit_book_binding.dart';
@@ -99,6 +101,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_DETAIL,
+      page: () => const BookDetailView(),
+      binding: BookDetailBinding(),
     ),
   ];
 }

@@ -20,10 +20,10 @@ class BookView extends GetView<BookController> {
         backgroundColor: Colors.deepPurpleAccent,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=>Get.toNamed(Routes.ADD_BOOK),
-        backgroundColor: Colors.deepPurpleAccent,
-        child: Icon(Icons.add),
-      ),
+          onPressed: ()=>controller.routing(),
+          backgroundColor: Colors.deepPurpleAccent,
+          child: Icon(Icons.add),
+        ),
       body: Container(
         child: SizedBox(
             width: Get.width,

@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
         ),
         floatingActionButton: Padding(
             padding: const EdgeInsets.symmetric(vertical: 30),
-            child: FloatingActionButton.small(
+            child: FloatingActionButton(
                 onPressed: ()  => controller.logout(),
                 backgroundColor: const Color(0xfff3f3f3),
                 elevation: 0,

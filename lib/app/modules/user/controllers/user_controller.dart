@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:geeks_foradmin/app/data/model/response_user_get.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constant/endpoint.dart';
 import '../../../data/provider/api_provider.dart';
+import '../../../data/provider/storage_provider.dart';
+import '../../../routes/app_pages.dart';
 
 class UserController extends GetxController with StateMixin {
 
@@ -27,8 +30,16 @@ class UserController extends GetxController with StateMixin {
     super.onClose();
   }
 
+  routing() {
+    if (StorageProvider.read(StorageKey.role) == 'ADMIN') {
+      Get.toNamed(Routes.STAFF);
+    } else {
+      Get.snackbar("Sorry", "Only For Admin!", backgroundColor: Colors.orange);
+    }
+  }
 
   Future<void> getData() async{
+
     userData.value = null;
     try {
       final response = await ApiProvider.instance().get(Endpoint.user);

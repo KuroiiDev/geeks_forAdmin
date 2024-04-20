@@ -51,7 +51,7 @@ class LoginController extends GetxController {
           ResponseLoginPost responseLogin = ResponseLoginPost.fromJson(response.data);
           await StorageProvider.write(StorageKey.idUser, responseLogin.data!.id.toString());
           await StorageProvider.write(StorageKey.name, responseLogin.data!.name.toString());
-          await StorageProvider.write(StorageKey.status, "logged");
+          await StorageProvider.write(StorageKey.role, responseLogin.data!.role.toString());
           Get.snackbar("Success", "Login Success!", backgroundColor: Colors.green);
           log("Name : ${StorageProvider.read(StorageKey.name)}");
           Get.offAllNamed(Routes.DASHBOARD);
