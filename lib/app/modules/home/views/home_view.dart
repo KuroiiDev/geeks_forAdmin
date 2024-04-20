@@ -14,6 +14,15 @@ class HomeView extends GetView<HomeController> {
           title: const Text('HomeView'),
           centerTitle: true,
         ),
+        floatingActionButton: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30),
+            child: FloatingActionButton.small(
+                onPressed: ()  => controller.logout(),
+                backgroundColor: const Color(0xfff3f3f3),
+                elevation: 0,
+                shape: const CircleBorder(),
+                child: Icon(Icons.logout, color: GlobalColor.title))),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Container(
           width: Get.width,
           height: Get.height,

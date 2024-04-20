@@ -25,11 +25,7 @@ class LoginView extends GetView<LoginController> {
   Widget _buildInputFields(){
     return Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xff7055f8), Color(0xff4e00a2)]
-            )
+            color: Colors.white
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -41,7 +37,7 @@ class LoginView extends GetView<LoginController> {
                   "Welcome Staff!",
                   style:TextStyle(
                       fontSize: 40,
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1
                   )
@@ -82,7 +78,7 @@ class LoginView extends GetView<LoginController> {
           color: Colors.white,
         ),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        fillColor: Colors.black.withOpacity(0.4),
         border: const OutlineInputBorder(borderSide: BorderSide.none),
       ),
       obscureText: false,
@@ -115,7 +111,7 @@ class LoginView extends GetView<LoginController> {
           color: Colors.white,
         ),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        fillColor: Colors.black.withOpacity(0.4),
         border: const OutlineInputBorder(borderSide: BorderSide.none),
       ),
       obscureText: controller.isObs.value,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:geeks_foradmin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
+import '../../../data/provider/storage_provider.dart';
+
 class HomeController extends GetxController {
   final TextEditingController idController = TextEditingController();
 
@@ -21,6 +23,12 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
+  logout() async{
+    await StorageProvider.write(StorageKey.idUser, "");
+    await StorageProvider.write(StorageKey.name, "");
+    await StorageProvider.write(StorageKey.status, "");
+    Get.offAllNamed(Routes.LOGIN);
+  }
   search() {
     if (idController.text.isNotEmpty) {
       var id = idController.text;

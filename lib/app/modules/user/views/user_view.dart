@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import '../../../data/constant/global_color.dart';
+import '../../../routes/app_pages.dart';
 import '../../../widgets/base_64_converter.dart';
 import '../controllers/user_controller.dart';
 
@@ -13,10 +14,16 @@ class UserView extends GetView<UserController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UserView'),
+        title: const Text('User List'),
         backgroundColor: Colors.deepPurpleAccent,
         centerTitle: true,
       ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: ()=>Get.toNamed(Routes.STAFF),
+          backgroundColor: Colors.deepPurpleAccent,
+          child: Icon(Icons.admin_panel_settings_outlined),
+        ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Container(
         child: SizedBox(
             width: Get.width,
