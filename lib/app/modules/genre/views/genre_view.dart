@@ -15,6 +15,7 @@ class GenreView extends GetView<GenreController> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('GenreView'),
+          backgroundColor: Colors.deepPurpleAccent,
           centerTitle: true,
         ),
         floatingActionButton: FloatingActionButton(
