@@ -84,6 +84,7 @@ class GenreView extends GetView<GenreController> {
                           itemCount: state.length);
                     }
                   }))),
-        ));
+        )
+    );
   }
 }

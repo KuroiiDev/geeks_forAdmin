@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../data/constant/global_color.dart';
+import '../../../routes/app_pages.dart';
 import '../../../widgets/base_64_converter.dart';
 import '../controllers/book_detail_controller.dart';
 
@@ -46,11 +48,8 @@ class BookDetailView extends GetView<BookDetailController> {
                 child: Container(
                     padding: const EdgeInsets.only(top: 20.0),
                     decoration: BoxDecoration(
-                        color: Colors.black,
-                        image: DecorationImage(
-                            image: ImageConverter.base64ToImage(bookDetail.cover ?? '-'),
-                            fit: BoxFit.cover,
-                            opacity: 450)),
+                        color: Colors.white
+                    ),
                     child: Padding(
                       padding:
                       const EdgeInsets.symmetric(horizontal: 70, vertical: 10),
@@ -171,7 +170,7 @@ class BookDetailView extends GetView<BookDetailController> {
             ),
 
             // Genre Build
-            state != null ? Container(
+            Container(
               padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 border: Border.symmetric(
@@ -183,12 +182,35 @@ class BookDetailView extends GetView<BookDetailController> {
                     Container(
                       padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: Text(
-                        'Genre',
-                        style: TextStyle(
-                            color: GlobalColor.subtitle,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Genre',
+                            style: TextStyle(
+                                color: GlobalColor.subtitle,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          ElevatedButton(
+                            onPressed: (){
+                              Get.toNamed(Routes.ADD_RELATION, parameters: {
+                                'id' : (bookDetail.id).toString(),
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding:
+                              const EdgeInsets.all(0),
+                              backgroundColor: GlobalColor.soft,
+                              elevation: 5,
+                              shape: CircleBorder(),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Container(
@@ -198,35 +220,53 @@ class BookDetailView extends GetView<BookDetailController> {
                       child: SizedBox(
                           width: Get.width,
                           height: 43,
-                          child: ListView.builder(
+                          child: state != null ? ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: state.length,
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 0),
-                                  child: Card(
-                                    color: Colors.white,
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(7.0)),
-                                    child: Container(
-                                        height: 30,
-                                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                                        child: Text(
-                                          state[index].genre!.genre.toString(),
-                                          style: TextStyle(
-                                              color: GlobalColor.soft, fontSize: 20),
-                                          textAlign: TextAlign.left,
-                                        )
+                                  child: InkWell(
+                                    onTap: (){
+                                      QuickAlert.show(
+                                        context: context,
+                                        type: QuickAlertType.error,
+                                        showCancelBtn: true,
+                                        showConfirmBtn: true,
+                                        onConfirmBtnTap: () => controller.unlink(state[index].id),
+                                        text:
+                                        'Are you sure you want to Unlink this genre?',
+                                        confirmBtnText: 'Delete',
+                                        title: 'Confirmation',
+                                        cancelBtnText: 'keep',
+                                        confirmBtnColor: Colors.red,
+                                        animType: QuickAlertAnimType.scale,
+                                      );
+                                    },
+                                    child: Card(
+                                      color: Colors.white,
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(7.0)),
+                                      child: Container(
+                                          height: 30,
+                                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                                          child: Text(
+                                            state[index].genre!.genre.toString(),
+                                            style: TextStyle(
+                                                color: GlobalColor.soft, fontSize: 20),
+                                            textAlign: TextAlign.left,
+                                          )
+                                      ),
                                     ),
                                   ),
                                 );
                               }
-                          )
+                          ) : Text('No Genre Yet')
                       ),
                     ),
                   ]),
-            ) : SizedBox(),
+            ),
 
             // Rating Build
             ratingDat != null ? Container(
@@ -308,7 +348,11 @@ class BookDetailView extends GetView<BookDetailController> {
                 children: [
 
                   ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Get.toNamed(Routes.EDIT_BOOK, parameters: {
+                        'id' : (bookDetail.id).toString(),
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       padding:
                       const EdgeInsets.all(20),
@@ -324,7 +368,22 @@ class BookDetailView extends GetView<BookDetailController> {
                   ),
 
                   ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.error,
+                        showCancelBtn: true,
+                        showConfirmBtn: true,
+                        onConfirmBtnTap: () => controller.delete(),
+                        text:
+                        'Are you sure you want to Delete this book?',
+                        confirmBtnText: 'Delete',
+                        title: 'Confirmation',
+                        cancelBtnText: 'keep',
+                        confirmBtnColor: Colors.red,
+                        animType: QuickAlertAnimType.scale,
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding:
                       const EdgeInsets.all(20),

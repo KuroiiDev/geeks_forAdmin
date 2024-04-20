@@ -17,6 +17,7 @@ abstract class Routes {
   static const STAFF = _Paths.STAFF;
   static const REGISTER = _Paths.REGISTER;
   static const BOOK_DETAIL = _Paths.BOOK_DETAIL;
+  static const ADD_RELATION = _Paths.ADD_RELATION;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const STAFF = '/staff';
   static const REGISTER = '/register';
   static const BOOK_DETAIL = '/book-detail';
+  static const ADD_RELATION = '/add-relation';
 }

@@ -4,6 +4,8 @@ import '../modules/add_book/bindings/add_book_binding.dart';
 import '../modules/add_book/views/add_book_view.dart';
 import '../modules/add_genre/bindings/add_genre_binding.dart';
 import '../modules/add_genre/views/add_genre_view.dart';
+import '../modules/add_relation/bindings/add_relation_binding.dart';
+import '../modules/add_relation/views/add_relation_view.dart';
 import '../modules/book/bindings/book_binding.dart';
 import '../modules/book/views/book_view.dart';
 import '../modules/book_detail/bindings/book_detail_binding.dart';
@@ -106,6 +108,11 @@ class AppPages {
       name: _Paths.BOOK_DETAIL,
       page: () => const BookDetailView(),
       binding: BookDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_RELATION,
+      page: () => const AddRelationView(),
+      binding: AddRelationBinding(),
     ),
   ];
 }
