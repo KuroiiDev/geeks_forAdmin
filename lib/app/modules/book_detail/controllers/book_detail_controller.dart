@@ -17,6 +17,7 @@ class BookDetailController extends GetxController with StateMixin {
   @override
   void onInit() {
     super.onInit();
+    getData();
   }
 
   @override
@@ -31,6 +32,9 @@ class BookDetailController extends GetxController with StateMixin {
 
   Future<void> getData() async {
     var bookId = Get.parameters['id'];
+    bookDetail.value = null;
+    genreData.value = null;
+    ratingData.value = null;
 
     // Get Rating
     try {

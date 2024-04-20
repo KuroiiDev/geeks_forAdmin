@@ -86,7 +86,16 @@ class BookDetailView extends GetView<BookDetailController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                
+                RatingBarIndicator(
+                  rating: (bookDetail.rating ?? 0).toDouble(),
+                  itemCount: 5,
+                  itemSize: 35,
+                  unratedColor: Colors.black12,
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star,
+                    color: GlobalColor.softDeep,
+                  ),
+                ),
                 Row(
                   children: [
                     Icon(Icons.shopping_cart,
@@ -270,6 +279,16 @@ class BookDetailView extends GetView<BookDetailController> {
                                                   color: GlobalColor.subtitle, fontSize: 20),
                                               textAlign: TextAlign.left,
                                             ),
+                                            RatingBarIndicator(
+                                              rating: (ratingDat[index].rating ?? 1),
+                                              itemCount: 5,
+                                              itemSize: 35,
+                                              unratedColor: Colors.black12,
+                                              itemBuilder: (context, index) => Icon(
+                                                Icons.star,
+                                                color: GlobalColor.softDeep,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -286,7 +305,57 @@ class BookDetailView extends GetView<BookDetailController> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [],
+                children: [
+
+                  ElevatedButton(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      padding:
+                      const EdgeInsets.all(20),
+                      backgroundColor: Colors.blue,
+                      elevation: 5,
+                      shape: CircleBorder(),
+                    ),
+                    child: Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      padding:
+                      const EdgeInsets.all(20),
+                      backgroundColor: Colors.red,
+                      elevation: 5,
+                      shape: CircleBorder(),
+                    ),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: ()=>controller.getData(),
+                    style: ElevatedButton.styleFrom(
+                      padding:
+                      const EdgeInsets.all(20),
+                      backgroundColor: GlobalColor.soft,
+                      elevation: 5,
+                      shape: CircleBorder(),
+                    ),
+                    child: Icon(
+                      Icons.refresh,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+
+                ],
               ),
             )
           ],
@@ -295,7 +364,4 @@ class BookDetailView extends GetView<BookDetailController> {
     });
   }
 
-}
-
-class RatingBarIndicator {
 }
