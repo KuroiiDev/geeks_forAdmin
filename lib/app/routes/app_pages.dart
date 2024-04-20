@@ -16,10 +16,14 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
 import '../modules/rent/bindings/rent_binding.dart';
 import '../modules/rent/views/rent_view.dart';
 import '../modules/rent_detail/bindings/rent_detail_binding.dart';
 import '../modules/rent_detail/views/rent_detail_view.dart';
+import '../modules/staff/bindings/staff_binding.dart';
+import '../modules/staff/views/staff_view.dart';
 import '../modules/user/bindings/user_binding.dart';
 import '../modules/user/views/user_view.dart';
 
@@ -85,6 +89,16 @@ class AppPages {
       name: _Paths.RENT_DETAIL,
       page: () => const RentDetailView(),
       binding: RentDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.STAFF,
+      page: () => const StaffView(),
+      binding: StaffBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => const RegisterView(),
+      binding: RegisterBinding(),
     ),
   ];
 }

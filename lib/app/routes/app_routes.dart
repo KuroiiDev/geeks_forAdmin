@@ -14,6 +14,8 @@ abstract class Routes {
   static const ADD_GENRE = _Paths.ADD_GENRE;
   static const EDIT_BOOK = _Paths.EDIT_BOOK;
   static const RENT_DETAIL = _Paths.RENT_DETAIL;
+  static const STAFF = _Paths.STAFF;
+  static const REGISTER = _Paths.REGISTER;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const ADD_GENRE = '/add-genre';
   static const EDIT_BOOK = '/edit-book';
   static const RENT_DETAIL = '/rent-detail';
+  static const STAFF = '/staff';
+  static const REGISTER = '/register';
 }
