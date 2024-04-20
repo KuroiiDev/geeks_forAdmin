@@ -21,4 +21,6 @@ class Endpoint {
   static const String rent = "${baseUrlApi}rent";
   static const String rentVerify = "${baseUrlApi}rent/verify";
   static const String rentReturn = "${baseUrlApi}rent/return";
+
+  static const String rating = "${baseUrlApi}rating/book";
 }

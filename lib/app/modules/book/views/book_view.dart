@@ -51,7 +51,11 @@ class BookView extends GetView<BookController> {
                         ),
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () {},
+                            onTap: (){
+                              Get.toNamed(Routes.BOOK_DETAIL, parameters: {
+                                'id' : (state[index].id).toString(),
+                              });
+                            },
                             child: Card(
                                 elevation: 5.0,
                                 child: Column(
