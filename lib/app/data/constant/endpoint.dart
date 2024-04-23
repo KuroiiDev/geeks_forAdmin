@@ -1,6 +1,6 @@
 class Endpoint {
 
-  static const String ipPort = "192.168.1.18:8000";
+  static const String ipPort = "192.168.137.1:8000";
 
   static const String baseUrlApi = "http://$ipPort/api/staff/";
 
